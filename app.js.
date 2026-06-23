@@ -1,42 +1,67 @@
-let panier = [];
 
-function ajouterAuPanier(nom, prix) {
-    let item = panier.find(i => i.nom === nom);
-    if (item) {
-        item.quantite++;
-    } else {
-        panier.push({ nom: nom, prix: prix, quantite: 1 });
-    }
-    updateUI();
-}
+ let panier = [];
 
-function updateUI() {
-    let count = panier.reduce((sum, item) => sum + item.quantite, 0);
-    document.getElementById('panier-count').innerText = count;
-    
-    let itemsContainer = document.getElementById('panier-items');
-    itemsContainer.innerHTML = '';
-    panier.forEach(item => {
-        itemsContainer.innerHTML += `<p>• ${item.nom} (Quantité: ${item.quantite})</p>`;
-    });
+function ajouterAuPanier(nomArticle, prix) {
+    panier.push({ nom: nomArticle, prix: prix });
+    document.getElementById('panier-count').innerText = panier.length;
+    alert(nomArticle + " a bien été ajouté à votre demande !");
 }
 
 function togglePanier() {
-    let modal = document.getElementById('panier-modal');
-    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    const modal = document.getElementById('panier-modal');
+    if (modal.style.display === 'block') {
+        modal.style.display = 'none';
+    } else {
+        modal.style.display = 'block';
+        afficherPanier();
+    }
+}
+
+function afficherPanier() {
+    const container = document.getElementById('panier-items');
+    container.innerHTML = '';
+
+    if (panier.length === 0) {
+        container.innerHTML = '<p>Votre panier est vide.</p>';
+        return;
+    }
+
+    panier.forEach((article, index) => {
+        const div = document.createElement('div');
+        div.style.marginBottom = '10px';
+        div.innerHTML = `• ${article.nom} <button onclick="retirerDuPanier(${index})" style="color:red; background:none; border:none; cursor:pointer;">(Supprimer)</button>`;
+        container.appendChild(div);
+    });
+}
+
+function retirerDuPanier(index) {
+    panier.splice(index, 1);
+    document.getElementById('panier-count').innerText = panier.length;
+    afficherPanier();
 }
 
 function passerCommande() {
-    if(panier.length === 0) return alert("Votre panier est vide !");
-    
-    let message = "Salut STONOUCH ! J'ai repéré des articles que tu as dénichés et je veux te les prendre :\n\n";
-    panier.forEach(item => {
-        message += `- ${item.nom} (Quantité: ${item.quantite})\n`;
+    if (panier.length === 0) {
+        alert("Votre panier est vide !");
+        return;
+    }
+
+    // Préparation du message texte pour WhatsApp
+    let message = "Bonjour STONOUCH, je souhaite passer une commande pour les articles suivants :\n\n";
+    panier.forEach((article) => {
+        message += `- ${article.nom}\n`;
     });
-    message += "\nDis-moi si c'est dispo pour qu'on gère la livraison !";
-    
-    // Mets ton numéro WhatsApp ici (ex: 2250700000000)
-    let numeroWhatsApp = "225XXXXXXXX"; 
-    let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
+    message += "\nMerci de me donner la disponibilité et les prix !";
+
+    // Encodage du texte pour l'URL
+    let messageEncode = encodeURIComponent(message);
+
+    // Ton numéro au format international avec l'indicatif de la Côte d'Ivoire (+225)
+    let numeroWhatsApp = "2250702900610";
+
+    // Lien de redirection automatique vers WhatsApp
+    let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${messageEncode}`;
+
+    // Ouvre WhatsApp dans un nouvel onglet
+    window.open(urlWhatsApp, '_blank');
 }
