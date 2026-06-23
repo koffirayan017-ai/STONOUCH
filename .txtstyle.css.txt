@@ -1,0 +1,169 @@
+/* Style Général */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1e29;
+    color: #ffffff;
+}
+
+/* En-tête (Header) */
+header {
+    background-color: #0f121d;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ff9900;
+}
+
+header .logo img {
+    height: 60px;
+    object-fit: contain;
+}
+
+.panier-icon {
+    background-color: #ff9900;
+    color: #1a1e29;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.panier-icon:hover {
+    background-color: #e08800;
+}
+
+/* Contenu Principal */
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #ff9900;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #a0aec0;
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+/* Grille des Produits */
+.products-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    background-color: #242b3d;
+    border: 1px solid #343e56;
+    border-radius: 12px;
+    padding: 25px;
+    width: 280px;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.badge {
+    background-color: #4a5568;
+    color: #ff9900;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3em;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #cbd5e0;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.product-card button {
+    width: 100%;
+    background-color: transparent;
+    border: 2px solid #ff9900;
+    color: #ff9900;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.product-card button:hover {
+    background-color: #ff9900;
+    color: #1a1e29;
+}
+
+/* Fenêtre Flottante (Modal Panier) */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #242b3d;
+    border: 2px solid #ff9900;
+    border-radius: 12px;
+    padding: 30px;
+    z-index: 1000;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal h2 {
+    margin-top: 0;
+    color: #ff9900;
+}
+
+#panier-items {
+    margin: 20px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border-bottom: 1px solid #343e56;
+    padding-bottom: 15px;
+}
+
+.btn-checkout {
+    width: 100%;
+    background-color: #ff9900;
+    color: #1a1e29;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.btn-close {
+    width: 100%;
+    background-color: #4a5568;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}

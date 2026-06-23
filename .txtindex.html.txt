@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STONOUCH - Le Dénicheur de Bons Plans</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <!-- Ton nouveau logo s'affichera ici -->
+            <img src="logo-stonouch.png" alt="STONOUCH Logo">
+        </div>
+        <div class="panier-icon" onclick="togglePanier()">🛒 Mon Panier (<span id="panier-count">0</span>)</div>
+    </header>
+
+    <main>
+        <h1>Les pépites dénichées par STONOUCH</h1>
+        <p class="subtitle">Électronique, Vêtements, Tout ce que vous cherchez, je le trouve au meilleur prix.</p>
+        
+        <div class="products-grid">
+            <!-- Exemple Article Électronique -->
+            <div class="product-card">
+                <div class="badge">Électronique</div>
+                <h3>Smartphone / Gadget Tech</h3>
+                <p class="price">Prix selon arrivage</p>
+                <button onclick="ajouterAuPanier('Article Électronique Tech', 0)">Ajouter à ma demande</button>
+            </div>
+            
+            <!-- Exemple Article Vêtement -->
+            <div class="product-card">
+                <div class="badge">Mode & Vêtements</div>
+                <h3>Arrivage Vêtements de Marque</h3>
+                <p class="price">Meilleur prix Garanti</p>
+                <button onclick="ajouterAuPanier('Lot Vêtements / Mode', 0)">Ajouter à ma demande</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fenêtre du Panier -->
+    <div id="panier-modal" class="modal">
+        <h2>Ma Demande d'Achat</h2>
+        <div id="panier-items"></div>
+        <button class="btn-checkout" onclick="passerCommande()">Envoyer ma commande à STONOUCH</button>
+        <button class="btn-close" onclick="togglePanier()">Continuer mes achats</button>
+    </div>
+
+    <!-- La correction est ici : src au lieu de href -->
+    <script src="app.js"></script>
+</body>
+</html>

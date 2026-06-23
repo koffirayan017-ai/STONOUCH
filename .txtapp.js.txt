@@ -1,0 +1,42 @@
+let panier = [];
+
+function ajouterAuPanier(nom, prix) {
+    let item = panier.find(i => i.nom === nom);
+    if (item) {
+        item.quantite++;
+    } else {
+        panier.push({ nom: nom, prix: prix, quantite: 1 });
+    }
+    updateUI();
+}
+
+function updateUI() {
+    let count = panier.reduce((sum, item) => sum + item.quantite, 0);
+    document.getElementById('panier-count').innerText = count;
+    
+    let itemsContainer = document.getElementById('panier-items');
+    itemsContainer.innerHTML = '';
+    panier.forEach(item => {
+        itemsContainer.innerHTML += `<p>• ${item.nom} (Quantité: ${item.quantite})</p>`;
+    });
+}
+
+function togglePanier() {
+    let modal = document.getElementById('panier-modal');
+    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+}
+
+function passerCommande() {
+    if(panier.length === 0) return alert("Votre panier est vide !");
+    
+    let message = "Salut STONOUCH ! J'ai repéré des articles que tu as dénichés et je veux te les prendre :\n\n";
+    panier.forEach(item => {
+        message += `- ${item.nom} (Quantité: ${item.quantite})\n`;
+    });
+    message += "\nDis-moi si c'est dispo pour qu'on gère la livraison !";
+    
+    // Mets ton numéro WhatsApp ici (ex: 2250700000000)
+    let numeroWhatsApp = "225XXXXXXXX"; 
+    let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+}
